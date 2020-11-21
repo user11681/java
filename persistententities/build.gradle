@@ -1,0 +1,10 @@
+version = "0.0.0"
+
+dependencies {
+    modApi "${project.api}"
+
+    modApi include("${project.autoConfig}")
+    modApi include("${project.clothConfig}")
+
+    modApi("${project.modMenu}")
+}

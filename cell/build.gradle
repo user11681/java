@@ -1,0 +1,12 @@
+project.version = "0.0.0"
+
+minecraft {
+    accessWidener("src/main/resources/cell.accesswidener")
+}
+
+dependencies {
+    modInclude("${project.apiBase}")
+    modInclude("${project.apiNetworking}")
+    modInclude("${project.apiResourceLoader}")
+    modInclude("${project.apiScreenHandler}")
+}

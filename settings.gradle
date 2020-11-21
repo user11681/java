@@ -1,0 +1,31 @@
+pluginManagement {
+    repositories {
+        jcenter()
+        maven {url = "https://maven.fabricmc.net"}
+        gradlePluginPortal()
+    }
+}
+
+include("cell")
+include("commonformatting")
+include("dynamicentry")
+include("fabricasmtools")
+include("fabriclexicon")
+//include("globalsettings")
+include("headsdowndisplay")
+include("invisiblelivingentities")
+include("limitless")
+include("mshell")
+include("narratoroff")
+include("noauth")
+include("persistententities")
+include("phormat")
+include("postalservice")
+include("projectfabrok")
+include("prone")
+include("scale")
+//include("soulboundarmory")
+include("sturdygold")
+include("thorium")
+include("visp")
+include("xradiation")

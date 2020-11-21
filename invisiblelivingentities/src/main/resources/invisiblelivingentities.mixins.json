@@ -1,0 +1,11 @@
+{
+    "required": true,
+    "package": "user11681.invisiblelivingentities.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "client": [
+        "mixin.LivingEntityRendererMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

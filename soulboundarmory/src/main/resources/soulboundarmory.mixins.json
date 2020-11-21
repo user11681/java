@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "package": "user11681.soulboundarmory.asm.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "entity.LightningEntityMixin",
+        "entity.LivingEntityMixin",
+        "entity.player.PlayerEntityMixin",
+        "entity.player.PlayerInventoryEntityMixin",
+        "entity.projectile.PersistentProjectileEntityMixin",
+        "item.ItemStackMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1,
+        "maxShiftBy": 5
+    }
+}

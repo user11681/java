@@ -1,0 +1,13 @@
+version = "0.1.3"
+
+dependencies {
+    modInclude("${project.apiBase}")
+    modInclude("${project.apiCommand}")
+    modInclude("${project.apiKeyBindings}")
+    modInclude("${project.apiNetworking}")
+    modInclude("${project.apiResourceLoader}")
+//    modApi("${project.multiconnect}")
+    modApi("${project.modMenu}") {
+        transitive(false)
+    }
+}

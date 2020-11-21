@@ -1,0 +1,13 @@
+user11681/projectfabrok/test/StatefulInterface.java
+ user11681.projectfabrok.test.StatefulInterface
+user11681/projectfabrok/test/ExtraStatefulInterface.java
+ user11681.projectfabrok.test.ExtraStatefulInterface
+user11681/projectfabrok/test/PrivateClass.java
+ user11681.projectfabrok.test.PrivateClass
+user11681/projectfabrok/test/StatefulImplImpl.java
+ user11681.projectfabrok.test.StatefulImplImpl
+user11681/projectfabrok/test/StatefulImpl.java
+ user11681.projectfabrok.test.StatefulImpl
+user11681/projectfabrok/test/JppTest.java
+ user11681.projectfabrok.test.JppTest
+ user11681.projectfabrok.test.JppTest$1

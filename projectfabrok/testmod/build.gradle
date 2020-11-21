@@ -1,0 +1,5 @@
+dependencies {
+    annotationProcessor(implementation(project(":core")))
+
+    modApi("${project.api}")
+}

@@ -1,0 +1,16 @@
+project.version = "0.0.4"
+
+dependencies {
+    modInclude("${project.apiResourceLoader}")
+    modApi("${project.modMenu}") {
+        transitive(false)
+    }
+    modApi("${project.basicMath}")
+    modInclude("${project.autoConfig}") {
+        transitive(false)
+    }
+    modInclude("${project.clothConfig}") {
+        transitive(false)
+    }
+    modApi("${project.narratorOff}")
+}

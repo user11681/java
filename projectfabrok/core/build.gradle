@@ -1,0 +1,10 @@
+dependencies {
+    compileOnly("${project.apiBase}")
+
+//    api(files("${System.getProperty("java.home")}/../lib/tools.jar"))
+//    api("com.sun:tools:+")
+}
+
+compileJava {
+    options.annotationProcessorPath = project.files("src/main/java/user11681/jpp/annotation/processor")
+}

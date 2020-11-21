@@ -1,0 +1,16 @@
+{
+    "text.autoconfig.arbitrarypatches.title": "arbitrary patches",
+    "text.autoconfig.arbitrarypatches.category.default": "general",
+    "text.autoconfig.arbitrarypatches.category.client": "client",
+    "text.autoconfig.arbitrarypatches.option.brownSand": "brown sand",
+    "text.autoconfig.arbitrarypatches.option.brownSand.@Tooltip[0]": "convert soul sand to brown sand",
+    "text.autoconfig.arbitrarypatches.option.brownSand.@Tooltip[1]": "",
+    "text.autoconfig.arbitrarypatches.option.brownSand.@Tooltip[2]": "bug: soul sand looks like yellow sand when this option is disabled",
+    "text.autoconfig.arbitrarypatches.option.client.hideRecipeBook": "hide recipe book",
+    "text.autoconfig.arbitrarypatches.option.client.tabClosesScreen": "TAB key closes screen",
+    "text.autoconfig.arbitrarypatches.option.client.disableMusic": "disable music",
+    "text.autoconfig.arbitrarypatches.option.client.hideRecipeBook.@Tooltip": "hide the recipe book in the survival inventory",
+    "text.autoconfig.arbitrarypatches.option.client.tabClosesScreen.@Tooltip[0]": "close GUIs with TAB",
+    "text.autoconfig.arbitrarypatches.option.client.tabClosesScreen.@Tooltip[1]": "works only when TAB is bound as the inventory key",
+    "text.autoconfig.arbitrarypatches.option.client.disableMusic.@Tooltip": "set music volume to 0 and remove the music slider in sound settings"
+}

@@ -1,0 +1,7 @@
+allprojects {
+    project.version = "0.1.0"
+
+    dependencies {
+        modInclude("${project.GFH}")
+    }
+}

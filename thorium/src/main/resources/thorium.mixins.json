@@ -1,0 +1,20 @@
+{
+    "required": true,
+    "package": "user11681.thorium.asm.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "block.AbstractBlockMixin",
+        "block.BlockMixin",
+        "block.SoulSandBlockMixin",
+        "i18n.I18nMixin",
+        "i18n.LanguageMixin"
+    ],
+    "client": [
+        "client.gui.screen.ingame.InventoryScreenMixin",
+        "client.gui.screen.ingame.ScreenMixin",
+        "client.sound.MusicTrackerMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 1,
+    "id": "invisiblelivingentities",
+    "version": "${version}",
+    "name": "invisible living entities",
+    "description": "a mod that makes living entities invisible and displays their names above them",
+    "authors": [
+        "user11681"
+    ],
+    "contact": {
+        "sources": "https://github.com/user11681/invisiblelivingentities"
+    },
+    "license": "CC0-1.0",
+    "icon": "assets/invisiblelivingentities/icon.png",
+    "environment": "client",
+    "mixins": [
+        "invisiblelivingentities.mixins.json"
+    ]
+}

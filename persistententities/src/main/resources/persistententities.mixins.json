@@ -1,0 +1,15 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "user11681.persistententities.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "ItemEntityMixin",
+        "MobEntityMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

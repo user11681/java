@@ -1,0 +1,33 @@
+{
+    "schemaVersion": 1,
+    "id": "fabriclexicon",
+    "version": "${version}",
+    "name": "Fabric Lexicon",
+    "description": "a mod that adds a Fabric Lexicon that can transmute equivalent items",
+    "icon": "assets/fabriclexicon/textures/item/fabric_lexicon.png",
+    "license": "GNU LGPL v3.0",
+
+    "authors": ["user11681"],
+    "contact": {
+        "sources": "https://github.com/user11681/fabriclexicon",
+        "issues": "https://github.com/user11681/fabriclexicon/issues"
+    },
+
+    "entrypoints": {
+        "main": [
+            "user11681.fabriclexicon.FabricLexicon"
+        ],
+        "client": [
+            "user11681.fabriclexicon.FabricLexicon"
+        ],
+        "cardinal-components-entity": [
+            "user11681.fabriclexicon.FabricLexicon"
+        ]
+    },
+
+    "custom": {
+        "cardinal-components": [
+            "fabriclexicon:fabric_lexicon"
+        ]
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "user11681.headsdowndisplay.asm.mixin",
+    "plugin": "user11681.headsdowndisplay.asm.HDDMixinConfigPlugin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "HeldItemRendererMixin",
+        "InGameHudMixin",
+        "VertexConsumerMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

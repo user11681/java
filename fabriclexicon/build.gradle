@@ -1,0 +1,11 @@
+project.version = "0.0.0"
+
+dependencies {
+    modInclude("${project.apiBase}")
+    modInclude("${project.apiNetworking}")
+    modInclude("${project.apiResourceLoader}")
+    modInclude("${project.apiScreenHandler}")
+
+    modInclude("${project.cardinalComponentsBase}")
+    modInclude("${project.cardinalComponentsEntity}")
+}

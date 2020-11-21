@@ -1,0 +1,9 @@
+{
+    "text.autoconfig.persistententities.title": "persistent entities",
+    "text.autoconfig.persistententities.option.itemTime": "item despawn time",
+    "text.autoconfig.persistententities.option.itemTime.@Tooltip": "the time period in ticks after which item entities despawn",
+    "text.autoconfig.persistententities.option.mobTime": "mob despawn time",
+    "text.autoconfig.persistententities.option.mobTime.@Tooltip": "the time period in ticks after which mob entities despawn",
+    "text.autoconfig.persistententities.option.disableItems": "prevent items from despawning",
+    "text.autoconfig.persistententities.option.disableMobs": "prevent mobs from despawning"
+}

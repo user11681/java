@@ -1,0 +1,24 @@
+{
+    "schemaVersion": 1,
+    "id": "commonformatting",
+    "version": "${version}",
+    "name": "common formatting",
+    "description": "a collection of common formatting styles",
+    "authors": [
+        "user11681"
+    ],
+    "contact": {
+        "repo": "https://github.com/user11681/commonformatting"
+    },
+    "license": "LGPL-3.0",
+    "icon": "assets/commonformatting/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "phormat:init": [
+            "user11681.commonformatting.CommonFormatting"
+        ]
+    },
+    "depends": {
+        "fabricloader": "*"
+    }
+}

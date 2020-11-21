@@ -1,0 +1,31 @@
+version = "1.1.0"
+
+dependencies {
+    bloated("${project.autoConfig}")
+    bloated("${project.clothConfig}")
+    modApi("${project.modMenu}") {
+        transitive(false)
+    }
+
+    modApi("${project.fabricASM}")
+
+    modInclude("${project.apiBase}")
+    modInclude("${project.apiTagExtensions}")
+    modInclude("${project.apiResourceLoader}")
+
+    modInclude("${project.GFH}")
+
+    includeLocal("phormat")
+    includeLocal("commonformatting")
+    includeLocal("fabricasmtools")
+
+    modApi("${project.noauth}")
+}
+
+def bloated(final String dependency) {
+    dependencies {
+        modInclude(dependency) {
+            exclude(module: "fabric-api")
+        }
+    }
+}
