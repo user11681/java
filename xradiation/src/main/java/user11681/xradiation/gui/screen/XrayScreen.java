@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -46,6 +45,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.Nullable;
 import user11681.xradiation.Configuration;
 import user11681.xradiation.Main;
 import user11681.xradiation.XRadiationItems;
@@ -82,7 +82,7 @@ public class XrayScreen extends AbstractInventoryScreen<XrayScreen.XrayScreenHan
     private SquareTexturedButton resetButton;
 
     public XrayScreen() {
-        super(new XrayScreenHandler(), Main.getPlayer().inventory, LiteralText.EMPTY);
+        super(new XrayScreenHandler(), Main.getPlayer().getInventory(), LiteralText.EMPTY);
 
         this.player = Main.getPlayer();
         this.player.currentScreenHandler = this.handler;
@@ -171,7 +171,7 @@ public class XrayScreen extends AbstractInventoryScreen<XrayScreen.XrayScreenHan
     @Override
     public void removed() {
         super.removed();
-        if (this.player != null && this.player.inventory != null) {
+        if (this.player != null && this.player.getInventory() != null) {
             this.player.playerScreenHandler.removeListener(this.listener);
         }
 
@@ -253,8 +253,8 @@ public class XrayScreen extends AbstractInventoryScreen<XrayScreen.XrayScreenHan
             this.addCustomItems(string);
 
             if (ALLOWED_KEY.startsWith(string) || ENABLED_KEY.startsWith(string)) {
-                itemList.addAll(Configuration.INSTANCE.allowedBlocks.parallelStream().map((final Block block) -> block.asItem().getStackForRender()).collect(Collectors.toList()));
-                itemList.addAll(Configuration.INSTANCE.allowedFluids.parallelStream().map((final Fluid fluid) -> fluid.getBucketItem().getStackForRender()).collect(Collectors.toList()));
+                itemList.addAll(Configuration.INSTANCE.allowedBlocks.parallelStream().map((final Block block) -> block.asItem().getDefaultStack()).collect(Collectors.toList()));
+                itemList.addAll(Configuration.INSTANCE.allowedFluids.parallelStream().map((final Fluid fluid) -> fluid.getBucketItem().getDefaultStack()).collect(Collectors.toList()));
             } else if (DISALLOWED_KEY.startsWith(string) || DISABLED_KEY.startsWith(string)) {
                 for (final Item item : Item.BLOCK_ITEMS.values()) {
                     item.appendStacks(ItemGroup.SEARCH, itemList);
@@ -299,7 +299,7 @@ public class XrayScreen extends AbstractInventoryScreen<XrayScreen.XrayScreenHan
 
         for (final Item item : XRadiationItems.ITEMS) {
             if (search == null || item.getName().getString().toLowerCase().contains(search)) {
-                itemList.add(item.getStackForRender());
+                itemList.add(item.getDefaultStack());
             }
         }
     }

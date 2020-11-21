@@ -1,6 +1,5 @@
 project.version = "0.1.4"
 
 dependencies {
-    includeLocal("dynamicentry")
     modInclude("${project.fabricASM}")
 }

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import user11681.phormat.api.TextFormatter;
+import user11681.phormat.api.format.TextFormatter;
 import user11681.phormat.asm.access.ExtendedStyle;
 import user11681.phormat.asm.access.FormattingAccess;
 import user11681.phormat.asm.access.TextRendererDrawerAccess;

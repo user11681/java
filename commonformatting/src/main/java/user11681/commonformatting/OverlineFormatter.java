@@ -4,7 +4,7 @@ import net.minecraft.client.font.FontStorage;
 import net.minecraft.client.font.Glyph;
 import net.minecraft.client.font.GlyphRenderer;
 import net.minecraft.text.Style;
-import user11681.phormat.api.TextFormatter;
+import user11681.phormat.api.format.TextFormatter;
 import user11681.phormat.asm.access.TextRendererDrawerAccess;
 
 public class OverlineFormatter implements TextFormatter {

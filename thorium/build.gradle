@@ -1,8 +1,8 @@
 version = "0.0.0"
 
 dependencies {
-    modApi include("${project.autoConfig}")
-    modApi include("${project.clothConfig}")
-    modApi "${project.api}"
-    modApi "${project.modMenu}"
+    modApi(include("${project.autoConfig}"))
+    modApi(include("${project.clothConfig}"))
+    modApi("${project.api}")
+    modApi("${project.modMenu}")
 }

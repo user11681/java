@@ -120,7 +120,7 @@ public class Configuration {
 
                 if (content instanceof JsonObject) {
                     final JsonObject configuration = (JsonObject) content;
-                    final Predicate<Block> blockPredicate = (final Block block) -> !block.is(Blocks.AIR);
+                    final Predicate<Block> blockPredicate = (final Block block) -> block != Blocks.AIR;
                     final Predicate<Fluid> fluidPredicate = (final Fluid fluid) -> !fluid.matchesType(Fluids.EMPTY);
 
                     this.readArrayAllowed("block", "allowedBlocks", configuration, this.allowedBlocks, this::resetBlocks, blockPredicate, Registry.BLOCK::get);
@@ -145,18 +145,18 @@ public class Configuration {
     }
 
     private <T> void readArrayCache(final String type, final String name, final JsonObject configuration, final Collection<T> output, final Predicate<T> addPredicate, final Function<Identifier, T> fromString) {
-        this.readArray(type, name, configuration, output, null, String.format("\"%s\" array in %s is not present; ignoring it.", name, this.file), addPredicate, fromString);
+        this.readArray(type, name, configuration, output, null, "{} array in {} is not present; ignoring it.", addPredicate, fromString);
     }
 
     private <T> void readArrayAllowed(final String type, final String name, final JsonObject configuration, final Collection<T> output, final Runnable onFail, final Predicate<T> addPredicate, final Function<Identifier, T> fromString) {
-        this.readArray(type, name, configuration, output, onFail, String.format("\"%s\" array in %s is not present; generating a default array instead.", name, this.file), addPredicate, fromString);
+        this.readArray(type, name, configuration, output, onFail, "{} array in {} is not present; generating a default array instead.", addPredicate, fromString);
     }
 
     private <T> void readArray(final String type, final String name, final JsonObject configuration, final Collection<T> output, final Runnable onFail, final String message, final Predicate<T> addPredicate, final Function<Identifier, T> fromString) {
         final JsonArray array = configuration.getAsJsonArray(name);
 
         if (array == null) {
-            Main.LOGGER.error("\"{}\" array in {} is not present; generating a default array instead.", name, this.file);
+            Main.LOGGER.error(message, name, this.file);
 
             if (onFail != null) {
                 onFail.run();

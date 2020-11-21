@@ -104,47 +104,18 @@ allprojects {
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
         }
-
-        final String jarPath = "${project.buildDir}/libs/${project.name}-${project.version}-dev.jar"
-
-        remapJar {
-            input.set(file(jarPath))
-
-            archiveName("${project.name}-${project.version}.jar")
-        }
-
-        artifacts {
-            dev(file: file(jarPath), type: "jar", builtBy: jar)
-        }
-
-        processResources {
-            inputs.property("version", project.version)
-
-            from(sourceSets.main.resources.srcDirs) {
-                include("fabric.mod.json")
-                expand("version": project.version)
-            }
-
-            from(sourceSets.main.resources.srcDirs) {
-                exclude("fabric.mod.json")
-            }
-        }
-
-        tasks.withType(JavaCompile) {
-            options.encoding = "UTF-8"
-        }
-    }
-
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        archiveClassifier.set("sources")
-
-        from(sourceSets.main.allSource)
     }
 }
 
 subprojects {
     dependencies {
         testImplementation(sourceSets.main.output)
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        archiveClassifier.set("sources")
+
+        from(sourceSets.main.allSource)
     }
 
     bintray {
@@ -189,12 +160,45 @@ subprojects {
             mavenLocal()
         }
     }
+
+    afterEvaluate {
+        final String jarPath = "${project.buildDir}/libs/${project.name}-${project.version}-dev.jar"
+
+        remapJar {
+            input.set(file(jarPath))
+
+            archiveName("${project.name}-${project.version}.jar")
+        }
+
+        artifacts {
+            dev(file: file(jarPath), type: "jar", builtBy: jar)
+        }
+
+        processResources {
+            inputs.property("version", project.version)
+
+            from(sourceSets.main.resources.srcDirs) {
+                include("fabric.mod.json")
+                expand("version": project.version)
+            }
+
+            from(sourceSets.main.resources.srcDirs) {
+                exclude("fabric.mod.json")
+            }
+        }
+
+        tasks.withType(JavaCompile) {
+            options.encoding = "UTF-8"
+        }
+    }
 }
 
 dependencies {
     afterEvaluate {
         subprojects.each {
-            compile(project(path: ":${it.name}", configuration: "dev"))
+            it = project(path: ":${it.name}", configuration: "dev");
+
+            api(it)
             testImplementation(project("${it.name}:").sourceSets.test.output)
         }
     }
