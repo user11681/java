@@ -1,4 +1,5 @@
 import net.fabricmc.loom.task.RunClientTask
+import net.fabricmc.loom.task.RunServerTask
 
 plugins {
     id("java-library")
@@ -8,28 +9,119 @@ plugins {
     id("com.jfrog.bintray") version("1.8.5")
 }
 
+final Map<String, String> repositoryMap = [
+        "user11681"       : "https://dl.bintray.com/user11681/maven",
+        "ladysnake"       : "https://dl.bintray.com/ladysnake/libs",
+        "wrenchable"      : "https://dl.bintray.com/zundrel/wrenchable",
+        "earthcomputer"   : "https://dl.bintray.com/earthcomputer/mods",
+        "blamejared"      : "https://maven.blamejared.com",
+        "dblsaiko"        : "https://maven.dblsaiko.net/",
+        "jamieswhiteshirt": "https://maven.jamieswhiteshirt.com/libs-release",
+        "buildcraft"      : "https://mod-buildcraft.com/maven",
+        "halfof2"         : "https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master",
+        "artifactory"     : "https://server.bbkr.space/artifactory/libs-release",
+        "jitpack"         : "https://jitpack.io"
+]
+
+final Map<String, String> artifactMap = [
+        "api"                     : "net.fabricmc.fabric-api:fabric-api:+",
+        "apibase"                 : "net.fabricmc.fabric-api:fabric-api-base:+",
+        "apicommand"              : "net.fabricmc.fabric-api:fabric-command-api-v1:+",
+        "apiscreenhandler"        : "net.fabricmc.fabric-api:fabric-screen-handler-api-v1:+",
+        "apieventsinteraction"    : "net.fabricmc.fabric-api:fabric-events-interaction-v0:+",
+        "apikeybindings"          : "net.fabricmc.fabric-api:fabric-key-binding-api-v1:+",
+        "apilifecycleevents"      : "net.fabricmc.fabric-api:fabric-lifecycle-events-v1:+",
+        "apinetworking"           : "net.fabricmc.fabric-api:fabric-networking-v0:+",
+        "apirendererapi"          : "net.fabricmc.fabric-api:fabric-renderer-api-v1:+",
+        "apirendererindigo"       : "net.fabricmc.fabric-api:fabric-renderer-indigo:+",
+        "apiresourceloader"       : "net.fabricmc.fabric-api:fabric-resource-loader-v0:+",
+        "apitagextensions"        : "net.fabricmc.fabric-api:fabric-tag-extensions-v0:+",
+        "junit"                   : "org.junit.jupiter:junit-jupiter:+",
+        "arrp"                    : "net.devtech:arrp:+",
+        "astromine"               : "com.github.Chainmail-Studios:Astromine:1.8.1",
+        "autoconfig"              : "me.sargunvohra.mcmods:autoconfig1u:+",
+        "basicmath"               : "me.shedaniel.cloth:basic-math:+",
+        "cardinalcomponents"      : "io.github.onyxstudios.Cardinal-Components-API:Cardinal-Components-API:+",
+        "cardinalcomponentsbase"  : "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:+",
+        "cardinalcomponentsentity": "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:+",
+        "cardinalcomponentsitem"  : "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:+",
+        "clothconfig"             : "me.shedaniel.cloth:config-2:+",
+        "cottonresources"         : "io.github.cottonmc:cotton-resources:+",
+        "fabricasm"               : "com.github.Chocohead:Fabric-ASM:master-SNAPSHOT",
+        "gfh"                     : "net.devtech:grossfabrichacks:0.+",
+        "javaparser"              : "com.github.javaparser:javaparser-symbol-solver-core:+",
+        "joor"                    : "org.jooq:joor-java-8:+",
+        "liltaterreloaded"        : "com.github.Yoghurt4C:LilTaterReloaded:fabric-1.16-SNAPSHOT",
+        "modmenu"                 : "io.github.prospector:modmenu:1.14.6+",
+        "multiconnect"            : "net.earthcomputer:multiconnect:+:api",
+        "rei"                     : "me.shedaniel:RoughlyEnoughItems:+",
+        "toml4j"                  : "com.moandjiezana.toml:toml4j:+",
+        "reachentityattributes"   : "com.jamieswhiteshirt:reach-entity-attributes:+",
+        "unsafe"                  : "net.gudenau.lib:unsafe:+",
+        "anvil"                   : "com.github.user11681:anvil:+",
+        "anvilevents"             : "com.github.user11681:anvilevents:+",
+        "bason"                   : "user11681:bason:+",
+        "commonformatting"        : "user11681:commonformatting:+",
+        "dynamicentry"            : "user11681:dynamicentry:+",
+        "fabricasmtools"          : "user11681:fabricasmtools:+",
+        "invisiblelivingentities" : "user11681:invisiblelivingentities:+",
+        "jpp"                     : "user11681:jpp:+",
+        "limitless"               : "user11681:limitless:+",
+        "narratoroff"             : "user11681:narratoroff:+",
+        "noauth"                  : "user11681:noauth:+",
+        "optional"                : "user11681:optional:+",
+        "phormat"                 : "user11681:phormat:+",
+        "prone"                   : "user11681:prone:+",
+        "reflect"                 : "user11681:reflect:+",
+        "shortcode"               : "user11681:shortcode:+",
+        "cell"                    : "user11681:cell:+",
+]
+
+final String minecraftVersion = "20w46a"
+final String yarnBuild = "21"
+
 allprojects {
-    apply(plugin: "java-library")
     apply(plugin: "maven")
-    apply(plugin: "maven-publish")
     apply(plugin: "fabric-loom")
-    apply(plugin: "com.jfrog.bintray")
 
     project.group = "user11681"
 
     ext.javaVersion = 8
+    ext.noSpam = true
+
+    ext.repository = {final String... names ->
+        for (final String name : names) {
+            final String value = repositoryMap.get(name)
+
+            repositories.maven {
+                url = value == null ? name : value
+            }
+        }
+    }
+
+    ext.resolve = {final Object... dependencyNotation ->
+        if (dependencyNotation.length == 1) {
+            final String value = artifactMap.get(dependencyNotation[0])
+
+            if (value != null) {
+                return value
+            }
+        }
+
+        return dependencyNotation
+    }
 
     ext.local = {final String... name ->
         Dependency dependency = null
 
         dependencies {
-            dependency = api(project(path: ":" + String.join(":", name), configuration: "dev"))
+            dependency = api(project(path: ":${name.join(":")}", configuration: "dev"))
         }
 
         return dependency
     }
 
-    ext.includeLocal = {final String... name ->
+    ext.localInclude = {final String... name ->
         Dependency dependency = null
 
         dependencies {
@@ -43,45 +135,26 @@ allprojects {
         Dependency dependency = null
 
         dependencies {
-            dependency = modApi(include(dependencyNotation))
+            dependency = modApi(include(resolve(dependencyNotation)))
         }
 
         return dependency
     }
 
-    sourceSets {
-        test {
-            compileClasspath += main.compileClasspath
-            runtimeClasspath += main.runtimeClasspath
+    ext.bloated = {final Object... dependencyNotation ->
+        return dependencies.modApi(resolve(dependencyNotation)) {
+            exclude(module: "fabric-api")
         }
     }
 
-    task runTestClient(type: RunClientTask) {
-        classpath(sourceSets.test.runtimeClasspath)
-    }
-
-    repositories {
-        mavenLocal()
-
-        maven {url = "https://dl.bintray.com/user11681/maven"}
-        maven {url = "https://dl.bintray.com/ladysnake/libs"}
-        maven {url = "https://dl.bintray.com/zundrel/wrenchable"}
-        maven {url = "https://dl.bintray.com/earthcomputer/mods"}
-        maven {url = "https://maven.blamejared.com"}
-        maven {url = "https://maven.dblsaiko.net/"}
-        maven {url = "https://maven.jamieswhiteshirt.com/libs-release"}
-        maven {url = "https://mod-buildcraft.com/maven"}
-        maven {url = "https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master"}
-        maven {url = "https://server.bbkr.space/artifactory/libs-release"}
-        maven {url = "https://jitpack.io"}
+    ext.bloatedInclude = {final Object... dependencyNotation ->
+        return dependencies.include(bloated(dependencyNotation))
     }
 
     dependencies {
-        minecraft("com.mojang:minecraft:${project.minecraftVersion}")
-        mappings("net.fabricmc:yarn:${project.minecraftVersion}+build.${project.yarnBuild}:v2")
+        minecraft("com.mojang:minecraft:${minecraftVersion}")
+        mappings("net.fabricmc:yarn:${minecraftVersion}+build.${yarnBuild}:v2")
         modImplementation("net.fabricmc:fabric-loader:+")
-
-        testImplementation("${project.junit}")
     }
 
     configurations {
@@ -91,6 +164,25 @@ allprojects {
     loom {
         shareCaches = true
     }
+}
+
+subprojects {
+    apply(plugin: "java-library")
+    apply(plugin: "maven-publish")
+    apply(plugin: "com.jfrog.bintray")
+
+    dependencies {
+        testImplementation(project.junit)
+
+        testImplementation(sourceSets.main.output)
+    }
+
+    sourceSets {
+        test {
+            compileClasspath += main.compileClasspath
+            runtimeClasspath += main.runtimeClasspath
+        }
+    }
 
     jar {
         archiveClassifier.set("dev")
@@ -98,24 +190,60 @@ allprojects {
         from("LICENSE")
     }
 
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        archiveClassifier.set("sources")
+
+        from(sourceSets.main.allSource)
+    }
+
+    task runTestClient(type: RunClientTask) {
+        classpath(sourceSets.test.runtimeClasspath)
+    }
+
+    task runTestServer(type: RunServerTask) {
+        classpath(sourceSets.test.runtimeClasspath)
+    }
+
     afterEvaluate {
+        if (noSpam) {
+            local("narratoroff")
+            local("noauth")
+        }
+
         tasks.withType(JavaCompile).configureEach {
             it.options.release.set(javaVersion)
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
         }
-    }
-}
 
-subprojects {
-    dependencies {
-        testImplementation(sourceSets.main.output)
-    }
+        final String jarPath = "${project.buildDir}/libs/${project.name}-${project.version}-dev.jar"
 
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        archiveClassifier.set("sources")
+        remapJar {
+            input.set(file(jarPath))
 
-        from(sourceSets.main.allSource)
+            archiveName("${project.name}-${project.version}.jar")
+        }
+
+        artifacts {
+            dev(file: file(jarPath), type: "jar", builtBy: jar)
+        }
+
+        processResources {
+            inputs.property("version", project.version)
+
+            from(sourceSets.main.resources.srcDirs) {
+                include("fabric.mod.json")
+                expand("version": project.version)
+            }
+
+            from(sourceSets.main.resources.srcDirs) {
+                exclude("fabric.mod.json")
+            }
+        }
+
+        tasks.withType(JavaCompile) {
+            options.encoding = "UTF-8"
+        }
     }
 
     bintray {
@@ -160,46 +288,15 @@ subprojects {
             mavenLocal()
         }
     }
-
-    afterEvaluate {
-        final String jarPath = "${project.buildDir}/libs/${project.name}-${project.version}-dev.jar"
-
-        remapJar {
-            input.set(file(jarPath))
-
-            archiveName("${project.name}-${project.version}.jar")
-        }
-
-        artifacts {
-            dev(file: file(jarPath), type: "jar", builtBy: jar)
-        }
-
-        processResources {
-            inputs.property("version", project.version)
-
-            from(sourceSets.main.resources.srcDirs) {
-                include("fabric.mod.json")
-                expand("version": project.version)
-            }
-
-            from(sourceSets.main.resources.srcDirs) {
-                exclude("fabric.mod.json")
-            }
-        }
-
-        tasks.withType(JavaCompile) {
-            options.encoding = "UTF-8"
-        }
-    }
 }
 
 dependencies {
     afterEvaluate {
         subprojects.each {
-            it = project(path: ":${it.name}", configuration: "dev");
-
-            api(it)
-            testImplementation(project("${it.name}:").sourceSets.test.output)
+//            it = project(path: ":${it.name}", configuration: "dev");
+//
+//            api(it)
+//            testImplementation(project("${it.name}:").sourceSets.test.output)
         }
     }
 }

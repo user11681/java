@@ -1,10 +1,10 @@
 version = "0.0.0"
 
 dependencies {
-    modApi "${project.api}"
+    modInclude(project.apiResourceLoader)
 
-    modApi include("${project.autoConfig}")
-    modApi include("${project.clothConfig}")
+    bloatedInclude(project.autoConfig)
+    bloatedInclude(project.clothConfig)
 
-    modApi("${project.modMenu}")
+    bloated(project.modMenu)
 }

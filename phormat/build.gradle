@@ -1,5 +1,9 @@
 project.version = "0.1.4"
 
+repositories {
+    repository("jitpack")
+}
+
 dependencies {
-    modInclude("${project.fabricASM}")
+    modInclude(project.fabricASM)
 }

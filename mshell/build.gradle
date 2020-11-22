@@ -1,11 +1,11 @@
 version = "0.0.0"
 
+javaVersion = 14
+
 dependencies {
-    modApi("${project.apiBase}")
-    modApi("${project.apiLifecycleEvents}")
-    modInclude("${project.apiKeyBindings}")
+    modInclude(project.apiBase)
+    modInclude(project.apiLifecycleEvents)
+    modInclude(project.apiKeyBindings)
 
-    api(include("${project.joor}"))
-
-    includeLocal("cell")
+    localInclude("cell")
 }

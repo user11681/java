@@ -1,5 +1,9 @@
 version = "0.0.0"
 
+repositories {
+    repository("user11681")
+}
+
 dependencies {
-    includeLocal("phormat")
+    localInclude("phormat")
 }

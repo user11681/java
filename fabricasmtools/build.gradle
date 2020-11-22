@@ -1,8 +1,10 @@
 project.version = "0.3.2"
 
-dependencies {
-    modApi("${project.narratorOff}")
+repositories {
+    repository("user11681")
+}
 
-    modInclude("${project.reflect}")
-    modInclude("${project.unsafe}")
+dependencies {
+    modInclude(project.reflect)
+    modInclude(project.unsafe)
 }

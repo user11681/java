@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import user11681.reflect.Classes;
 
 public interface EnchantmentUtil {
     int SUCCESS = 0;
@@ -52,13 +51,14 @@ public interface EnchantmentUtil {
         return tryMerge(itemStack, enchantment.enchantment, enchantment.level, mergeConflicts);
     }
 
+    @SuppressWarnings("unchecked")
     static int tryMerge(final ItemStack itemStack, final Enchantment enchantment, final int level, final boolean mergeConflicts) {
         int status = ADD;
 
         final boolean book = itemStack.getItem() == Items.ENCHANTED_BOOK;
         final ListTag enchantments = book ? EnchantedBookItem.getEnchantmentTag(itemStack) : itemStack.getEnchantments();
 
-        for (final CompoundTag enchantmentTag : Classes.<Iterable<CompoundTag>>cast(enchantments)) {
+        for (final CompoundTag enchantmentTag : (Iterable<CompoundTag>) (Object) enchantments) {
             if (new Identifier(enchantmentTag.getString("id")).equals(Registry.ENCHANTMENT.getId(enchantment))) {
                 final int tagLevel = enchantmentTag.getInt("lvl");
 

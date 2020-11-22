@@ -1,5 +1,11 @@
 project.version = "0.0.1"
 
+noSpam = false
+
+repositories {
+    repository("user11681")
+}
+
 dependencies {
-    modInclude("${project.unsafe}")
+    modInclude(project.unsafe)
 }

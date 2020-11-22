@@ -30,10 +30,9 @@ public class Visp implements ClientModInitializer {
 
     public static <T extends Collection<ItemStack>> T getInventory(final T storage) {
         final List<DefaultedList<ItemStack>> inventories = ((PlayerInventoryAccess) client.player.getInventory()).getCombinedInventory();
-        final int size = inventories.size();
 
-        for (int i = 0; i < size; i++) {
-            storage.addAll(inventories.get(i));
+        for (DefaultedList<ItemStack> inventory : inventories) {
+            storage.addAll(inventory);
         }
 
         return storage;

@@ -1,21 +1,21 @@
 version = "0.1.0"
 
 dependencies {
-    modInclude("${project.apiBase}")
-    modInclude("${project.apiKeyBindings}")
-    modInclude("${project.apiResourceLoader}")
+    modInclude(project.apiBase)
+    modInclude(project.apiKeyBindings)
+    modInclude(project.apiResourceLoader)
 
-    modInclude("${project.autoConfig}") {
+    modInclude(project.autoConfig) {
         exclude(module: "fabric-api")
     }
 
-    modInclude("${project.clothConfig}") {
+    modInclude(project.clothConfig) {
         exclude(module: "fabric-api")
     }
 
-    modApi("${project.basicMath}")
+    modApi(project.basicMath)
 
-    modApi("${project.modMenu}") {
+    modApi(project.modMenu) {
         transitive(false)
     }
 }
