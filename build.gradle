@@ -40,43 +40,43 @@ final Map<String, String> artifactMap = [
         "apirendererindigo"       : "net.fabricmc.fabric-api:fabric-renderer-indigo:+",
         "apiresourceloader"       : "net.fabricmc.fabric-api:fabric-resource-loader-v0:+",
         "apitagextensions"        : "net.fabricmc.fabric-api:fabric-tag-extensions-v0:+",
-        "junit"                   : "org.junit.jupiter:junit-jupiter:+",
         "arrp"                    : "net.devtech:arrp:+",
         "astromine"               : "com.github.Chainmail-Studios:Astromine:1.8.1",
         "autoconfig"              : "me.sargunvohra.mcmods:autoconfig1u:+",
         "basicmath"               : "me.shedaniel.cloth:basic-math:+",
+        "bason"                   : "user11681:bason:+",
         "cardinalcomponents"      : "io.github.onyxstudios.Cardinal-Components-API:Cardinal-Components-API:+",
         "cardinalcomponentsbase"  : "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:+",
         "cardinalcomponentsentity": "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:+",
         "cardinalcomponentsitem"  : "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:+",
+        "cell"                    : "user11681:cell:+",
         "clothconfig"             : "me.shedaniel.cloth:config-2:+",
         "cottonresources"         : "io.github.cottonmc:cotton-resources:+",
-        "fabricasm"               : "com.github.Chocohead:Fabric-ASM:master-SNAPSHOT",
-        "gfh"                     : "net.devtech:grossfabrichacks:0.+",
-        "javaparser"              : "com.github.javaparser:javaparser-symbol-solver-core:+",
-        "joor"                    : "org.jooq:joor-java-8:+",
-        "liltaterreloaded"        : "com.github.Yoghurt4C:LilTaterReloaded:fabric-1.16-SNAPSHOT",
-        "modmenu"                 : "io.github.prospector:modmenu:1.14.6+",
-        "multiconnect"            : "net.earthcomputer:multiconnect:+:api",
-        "rei"                     : "me.shedaniel:RoughlyEnoughItems:+",
-        "toml4j"                  : "com.moandjiezana.toml:toml4j:+",
-        "reachentityattributes"   : "com.jamieswhiteshirt:reach-entity-attributes:+",
-        "unsafe"                  : "net.gudenau.lib:unsafe:+",
-        "bason"                   : "user11681:bason:+",
         "commonformatting"        : "user11681:commonformatting:+",
         "dynamicentry"            : "user11681:dynamicentry:+",
+        "fabricasm"               : "com.github.Chocohead:Fabric-ASM:master-SNAPSHOT",
         "fabricasmtools"          : "user11681:fabricasmtools:+",
+        "gfh"                     : "net.devtech:grossfabrichacks:0.+",
         "invisiblelivingentities" : "user11681:invisiblelivingentities:+",
-        "jpp"                     : "user11681:jpp:+",
+        "javaparser"              : "com.github.javaparser:javaparser-symbol-solver-core:+",
+        "joor"                    : "org.jooq:joor-java-8:+",
+        "junit"                   : "org.junit.jupiter:junit-jupiter:+",
+        "liltaterreloaded"        : "com.github.Yoghurt4C:LilTaterReloaded:fabric-1.16-SNAPSHOT",
         "limitless"               : "user11681:limitless:+",
+        "modmenu"                 : "io.github.prospector:modmenu:1.14.6+",
+        "multiconnect"            : "net.earthcomputer:multiconnect:+:api",
         "narratoroff"             : "user11681:narratoroff:+",
         "noauth"                  : "user11681:noauth:+",
         "optional"                : "user11681:optional:+",
         "phormat"                 : "user11681:phormat:+",
+        "projectfabrok"                     : "user11681:projectfabrok:+",
         "prone"                   : "user11681:prone:+",
+        "reachentityattributes"   : "com.jamieswhiteshirt:reach-entity-attributes:+",
         "reflect"                 : "user11681:reflect:+",
+        "rei"                     : "me.shedaniel:RoughlyEnoughItems:+",
         "shortcode"               : "user11681:shortcode:+",
-        "cell"                    : "user11681:cell:+",
+        "toml4j"                  : "com.moandjiezana.toml:toml4j:+",
+        "unsafe"                  : "net.gudenau.lib:unsafe:+",
 ]
 
 String minecraftVersion = null
@@ -202,7 +202,7 @@ subprojects {
     apply(plugin: "com.jfrog.bintray")
 
     dependencies {
-        testImplementation("junit")
+        testImplementation(resolve("junit"))
 
         testImplementation(sourceSets.main.output)
     }
