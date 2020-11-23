@@ -5,5 +5,5 @@ repositories {
 }
 
 dependencies {
-    modInclude(project.fabricASM)
+    modInclude("fabricasm")
 }

@@ -1,10 +1,10 @@
 version = "0.0.0"
 
 dependencies {
-    modInclude(project.apiResourceLoader)
+    modInclude("apiresourceloader")
 
-    bloatedInclude(project.autoConfig)
-    bloatedInclude(project.clothConfig)
+    bloatedInclude("autoconfig")
+    bloatedInclude("clothconfig")
 
-    bloated(project.modMenu)
+    bloated("modmenu")
 }

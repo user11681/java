@@ -10,7 +10,7 @@ import org.junit.platform.commons.annotation.Testable;
 
 @Testable
 class CellTest {
-    static final Logger LOGGER = LogManager.getLogger("spun");
+    static final Logger LOGGER = LogManager.getLogger("cell");
     static final ObjectList<String> results = new ObjectArrayList<>();
     static final int iterations = 100000;
     static final int tests = 100000;

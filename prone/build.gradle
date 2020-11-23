@@ -5,13 +5,13 @@ repositories {
 }
 
 dependencies {
-    modInclude(project.apiBase)
-    modInclude(project.apiCommand)
-    modInclude(project.apiKeyBindings)
-    modInclude(project.apiNetworking)
-    modInclude(project.apiResourceLoader)
-    modApi(project.multiconnect)
-    modApi(project.modMenu) {
-        transitive(false)
-    }
+    modInclude("apibase")
+    modInclude("apicommand")
+    modInclude("apikeybindings")
+    modInclude("apinetworking")
+    modInclude("apiresourceloader")
+
+    mod("multiconnect")
+
+    bloated("modmenu")
 }

@@ -1,8 +1,8 @@
 project.version = "0.0.4"
 
 dependencies {
-    modInclude(project.apiResourceLoader)
-    bloatedInclude(project.autoConfig)
-    bloatedInclude(project.clothConfig)
-    bloated(project.modMenu)
+    modInclude("apiresourceloader")
+    bloatedInclude("autoconfig")
+    bloatedInclude("clothconfig")
+    bloated("modmenu")
 }

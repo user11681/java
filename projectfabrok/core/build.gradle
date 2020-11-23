@@ -1,5 +1,5 @@
 dependencies {
-    compileOnly(project.apiBase)
+    compileOnly("apibase")
 
 //    api(files("${System.getProperty("java.home")}/../lib/tools.jar"))
 //    api("com.sun:tools:+")

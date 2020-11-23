@@ -1,8 +1,10 @@
 version = "0.0.0"
 
 dependencies {
-    modApi(project.api)
-    bloatedInclude(project.autoConfig)
-    bloatedInclude(project.clothConfig)
-    bloated(project.modMenu)
+    mod("api")
+
+    bloated("modmenu")
+
+    bloatedInclude("autoconfig")
+    bloatedInclude("clothconfig")
 }

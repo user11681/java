@@ -8,8 +8,8 @@ import org.apache.logging.log4j.Logger;
 public class Cell {
     public static final MinecraftClient client = MinecraftClient.getInstance();
 
-    public static final String ID = "spun";
-    public static final String NAME = "spun";
+    public static final String ID = "cell";
+    public static final String NAME = "cell";
 
     public static final Logger logger = LogManager.getLogger();
 

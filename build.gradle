@@ -62,8 +62,6 @@ final Map<String, String> artifactMap = [
         "toml4j"                  : "com.moandjiezana.toml:toml4j:+",
         "reachentityattributes"   : "com.jamieswhiteshirt:reach-entity-attributes:+",
         "unsafe"                  : "net.gudenau.lib:unsafe:+",
-        "anvil"                   : "com.github.user11681:anvil:+",
-        "anvilevents"             : "com.github.user11681:anvilevents:+",
         "bason"                   : "user11681:bason:+",
         "commonformatting"        : "user11681:commonformatting:+",
         "dynamicentry"            : "user11681:dynamicentry:+",
@@ -143,7 +141,7 @@ allprojects {
 
     ext.resolve = {final Object... dependencyNotation ->
         if (dependencyNotation.length == 1) {
-            final String value = artifactMap.get(dependencyNotation[0])
+            final String value = artifactMap.get(dependencyNotation[0].toString().replace("-", "").toLowerCase(Locale.ROOT))
 
             if (value != null) {
                 return value
@@ -204,7 +202,7 @@ subprojects {
     apply(plugin: "com.jfrog.bintray")
 
     dependencies {
-        testImplementation(project.junit)
+        testImplementation("junit")
 
         testImplementation(sourceSets.main.output)
     }

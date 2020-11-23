@@ -5,9 +5,9 @@ minecraft {
 }
 
 dependencies {
-    modInclude(project.apiBase)
-    modInclude(project.apiKeyBindings)
-    modInclude(project.apiRendererApi)
-    modInclude(project.apiRendererIndigo)
-    modInclude(project.apiResourceLoader)
+    modInclude("apibase")
+    modInclude("apikeybindings")
+    modInclude("apirendererapi")
+    modInclude("apirendererindigo")
+    modInclude("apiresourceloader")
 }
