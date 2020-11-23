@@ -1,6 +1,10 @@
 import net.fabricmc.loom.task.RunClientTask
 import net.fabricmc.loom.task.RunServerTask
 
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+
 plugins {
     id("java-library")
     id("maven")
@@ -77,14 +81,52 @@ final Map<String, String> artifactMap = [
         "cell"                    : "user11681:cell:+",
 ]
 
-final String minecraftVersion = "20w46a"
-final String yarnBuild = "21"
+String minecraftVersion = null
+String yarnBuild = null
+
+final HttpClient httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build()
+
+if (!minecraftVersion) {
+    final HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://meta.fabricmc.net/v2/versions/game")).build()
+    final HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+
+    if (response.statusCode() == 200) {
+        final String body = response.body()
+
+        minecraftVersion = body.substring(body.indexOf(":")).find("(?<=\").+(?=\")")
+    }
+}
+
+if (!yarnBuild) {
+    final HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://meta.fabricmc.net/v2/versions/yarn/${minecraftVersion}")).build()
+    final HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
+
+    if (response.statusCode() == 200) {
+        final String body = response.body()
+
+        yarnBuild = body.substring(body.indexOf("separator")).find("\\d+")
+    }
+}
 
 allprojects {
     apply(plugin: "maven")
     apply(plugin: "fabric-loom")
 
     project.group = "user11681"
+
+    dependencies {
+        minecraft("com.mojang:minecraft:${minecraftVersion}")
+        mappings("net.fabricmc:yarn:${minecraftVersion}+build.${yarnBuild}:v2")
+        modImplementation("net.fabricmc:fabric-loader:+")
+    }
+
+    configurations {
+        dev
+    }
+
+    loom {
+        shareCaches = true
+    }
 
     ext.javaVersion = 8
     ext.noSpam = true
@@ -131,6 +173,10 @@ allprojects {
         return dependency
     }
 
+    ext.mod = {final Object... dependencyNotation ->
+        return dependencies.modApi(resolve(dependencyNotation))
+    }
+
     ext.modInclude = {final Object... dependencyNotation ->
         Dependency dependency = null
 
@@ -150,20 +196,6 @@ allprojects {
     ext.bloatedInclude = {final Object... dependencyNotation ->
         return dependencies.include(bloated(dependencyNotation))
     }
-
-    dependencies {
-        minecraft("com.mojang:minecraft:${minecraftVersion}")
-        mappings("net.fabricmc:yarn:${minecraftVersion}+build.${yarnBuild}:v2")
-        modImplementation("net.fabricmc:fabric-loader:+")
-    }
-
-    configurations {
-        dev
-    }
-
-    loom {
-        shareCaches = true
-    }
 }
 
 subprojects {
@@ -178,10 +210,8 @@ subprojects {
     }
 
     sourceSets {
-        test {
-            compileClasspath += main.compileClasspath
-            runtimeClasspath += main.runtimeClasspath
-        }
+        test.compileClasspath += main.compileClasspath
+        test.runtimeClasspath += main.runtimeClasspath
     }
 
     jar {

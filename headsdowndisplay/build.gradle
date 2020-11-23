@@ -1,21 +1,10 @@
 version = "0.1.0"
 
 dependencies {
-    modInclude(project.apiBase)
-    modInclude(project.apiKeyBindings)
-    modInclude(project.apiResourceLoader)
-
-    modInclude(project.autoConfig) {
-        exclude(module: "fabric-api")
-    }
-
-    modInclude(project.clothConfig) {
-        exclude(module: "fabric-api")
-    }
-
-    modApi(project.basicMath)
-
-    modApi(project.modMenu) {
-        transitive(false)
-    }
+    modInclude("apibase")
+    modInclude("apikeybindings")
+    modInclude("apiresourceloader")
+    bloatedInclude("autoconfig")
+    bloatedInclude("clothconfig")
+    bloated("modmenu")
 }

@@ -6,11 +6,11 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.class_5632;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -245,11 +245,11 @@ public final class DelegatingHandledScreen extends HandledScreen<Container> {
     }
 
     @Override
-    public void method_32634(final MatrixStack matrixStack, final List<Text> list, final Optional<class_5632> optional, final int i, final int j) {
+    public void method_32634(final MatrixStack matrixStack, final List<Text> list, final Optional<TooltipData> tooltipData, final int i, final int j) {
         if ("method_32634".equals(this.container.method)) {
-            super.method_32634(matrixStack, list, optional, i, j);
+            super.method_32634(matrixStack, list, tooltipData, i, j);
         } else {
-            this.container.method_32634(matrixStack, list, optional, i, j);
+            this.container.method_32634(matrixStack, list, tooltipData, i, j);
         }
     }
 

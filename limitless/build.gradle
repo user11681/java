@@ -8,13 +8,12 @@ dependencies {
     modInclude("apibase")
     modInclude("apiresourceloader")
     modInclude("apitagextensions")
+    modInclude("gfh")
 
-    bloatedInclude(project.autoConfig)
-    bloatedInclude(project.clothConfig)
-    bloated(project.modMenu)
+    bloated("modmenu")
 
-//    modInclude(project.GFH)
-    modApi(include(project.GFH))
+    bloatedInclude("autoconfig")
+    bloatedInclude("clothconfig")
 
     localInclude("phormat")
     localInclude("commonformatting")
