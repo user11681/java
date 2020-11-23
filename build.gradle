@@ -131,7 +131,7 @@ allprojects {
 
     ext.repository = {final String... names ->
         for (final String name : names) {
-            final String value = repositoryMap.get(name)
+            final String value = repositoryMap.get(name.replaceAll("-", "").toLowerCase(Locale.ROOT))
 
             repositories.maven {
                 url = value == null ? name : value
