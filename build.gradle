@@ -14,17 +14,17 @@ plugins {
 }
 
 final Map<String, String> repositoryMap = [
-        "user11681"       : "https://dl.bintray.com/user11681/maven",
-        "ladysnake"       : "https://dl.bintray.com/ladysnake/libs",
-        "wrenchable"      : "https://dl.bintray.com/zundrel/wrenchable",
-        "earthcomputer"   : "https://dl.bintray.com/earthcomputer/mods",
-        "blamejared"      : "https://maven.blamejared.com",
-        "dblsaiko"        : "https://maven.dblsaiko.net/",
-        "jamieswhiteshirt": "https://maven.jamieswhiteshirt.com/libs-release",
-        "buildcraft"      : "https://mod-buildcraft.com/maven",
-        "halfof2"         : "https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master",
         "artifactory"     : "https://server.bbkr.space/artifactory/libs-release",
-        "jitpack"         : "https://jitpack.io"
+        "blamejared"      : "https://maven.blamejared.com",
+        "buildcraft"      : "https://mod-buildcraft.com/maven",
+        "dblsaiko"        : "https://maven.dblsaiko.net/",
+        "earthcomputer"   : "https://dl.bintray.com/earthcomputer/mods",
+        "halfof2"         : "https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master",
+        "jamieswhiteshirt": "https://maven.jamieswhiteshirt.com/libs-release",
+        "jitpack"         : "https://jitpack.io",
+        "ladysnake"       : "https://dl.bintray.com/ladysnake/libs",
+        "user11681"       : "https://dl.bintray.com/user11681/maven",
+        "wrenchable"      : "https://dl.bintray.com/zundrel/wrenchable"
 ]
 
 final Map<String, String> artifactMap = [
@@ -76,7 +76,7 @@ final Map<String, String> artifactMap = [
         "rei"                     : "me.shedaniel:RoughlyEnoughItems:+",
         "shortcode"               : "user11681:shortcode:+",
         "toml4j"                  : "com.moandjiezana.toml:toml4j:+",
-        "unsafe"                  : "net.gudenau.lib:unsafe:+",
+        "unsafe"                  : "net.gudenau.lib:unsafe:+"
 ]
 
 String minecraftVersion = null
