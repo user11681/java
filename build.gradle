@@ -6,11 +6,9 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 plugins {
-    id("java-library")
-    id("maven")
-    id("maven-publish")
     id("fabric-loom") version("0.5-SNAPSHOT")
-    id("com.jfrog.bintray") version("1.8.5")
+    id("com.jfrog.bintray") version("1.8.5") apply(false)
+    id("org.jetbrains.kotlin.jvm") version("1.4.20") apply(false)
 }
 
 final Map<String, String> repositoryMap = [
@@ -91,7 +89,7 @@ if (!minecraftVersion) {
     if (response.statusCode() == 200) {
         final String body = response.body()
 
-        minecraftVersion = body.substring(body.indexOf(":")).find("(?<=\").+(?=\")")
+        minecraftVersion = body.substring(body.indexOf(":")).find("(?<=\").*(?=\")")
     }
 }
 
@@ -106,8 +104,32 @@ if (!yarnBuild) {
     }
 }
 
+/*
+dependencies {
+    afterEvaluate {
+        final String gradlew = System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") ? "gradlew.bat": "./gradlew"
+        final File currentVersionDirectory = new File(loom.userCache, "${minecraftVersion}-mapped-net.fabricmc.yarn-${minecraftVersion}+build.${yarnBuild}-v2")
+        final File lock = new File(project.rootDir, ".gensources.lock")
+
+        if (lock.exists() || new File(currentVersionDirectory, "minecraft-${currentVersionDirectory}-sources.jar").exists()) {
+            println(true)
+        } else {
+            if (lock.createNewFile()) {
+                final Thread thread = new Thread({
+                    new ProcessBuilder("${gradlew}", ":genSources").directory(project.rootDir).start().waitFor()
+                })
+
+                thread.start()
+            } else {
+                System.err.println("Lock file ${lock} could not be made; will not automatically run genSources.")
+            }
+        }
+    }
+}
+*/
+
 allprojects {
-    apply(plugin: "maven")
+    apply(plugin: "java-library")
     apply(plugin: "fabric-loom")
 
     project.group = "user11681"
@@ -122,12 +144,30 @@ allprojects {
         dev
     }
 
-    loom {
-        shareCaches = true
-    }
+    loom.shareCaches = true
 
     ext.javaVersion = 8
     ext.noSpam = true
+
+    ext.kotlin = {final boolean enabled ->
+        if (enabled) {
+            apply(plugin: "kotlin")
+
+            final String version = JavaVersion.toVersion(project.javaVersion).toString()
+
+            compileKotlin {
+                kotlinOptions.jvmTarget = version
+            }
+
+            compileTestKotlin {
+                kotlinOptions.jvmTarget = version
+            }
+
+            dependencies {
+                api("org.jetbrains.kotlin:kotlin-stdlib-jdk${project.javaVersion}")
+            }
+        }
+    }
 
     ext.repository = {final String... names ->
         for (final String name : names) {
@@ -165,7 +205,7 @@ allprojects {
         Dependency dependency = null
 
         dependencies {
-            dependency = include(local(name))
+            dependency = modApi(include(local(name)))
         }
 
         return dependency
@@ -197,7 +237,6 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin: "java-library")
     apply(plugin: "maven-publish")
     apply(plugin: "com.jfrog.bintray")
 
@@ -233,15 +272,15 @@ subprojects {
     }
 
     afterEvaluate {
-        if (noSpam) {
+        if (project.noSpam) {
             local("narratoroff")
             local("noauth")
         }
 
         tasks.withType(JavaCompile).configureEach {
-            it.options.release.set(javaVersion)
-            sourceCompatibility = javaVersion
-            targetCompatibility = javaVersion
+            it.options.release.set(project.javaVersion)
+            sourceCompatibility = project.javaVersion
+            targetCompatibility = project.javaVersion
         }
 
         final String jarPath = "${project.buildDir}/libs/${project.name}-${project.version}-dev.jar"
@@ -249,7 +288,7 @@ subprojects {
         remapJar {
             input.set(file(jarPath))
 
-            archiveName("${project.name}-${project.version}.jar")
+            archiveFileName = "${project.name}-${project.version}.jar"
         }
 
         artifacts {

@@ -17,7 +17,7 @@ import user11681.limitless.config.enchantment.entry.EnchantmentParticleConfigura
 import user11681.limitless.config.enchantment.entry.ReenchantingConfiguration;
 import user11681.limitless.config.enchantment.entry.normalization.EnchantmentNormalizationEntry;
 import user11681.limitless.config.enchantment.entry.EnchantingBlockConfiguration;
-import user11681.limitless.enchantment.EnchantingBlockEntry;
+import user11681.limitless.asm.mixin.enchantment.EnchantingBlockEntry;
 
 public class EnchantmentConfiguration implements ConfigData {
     @Excluded

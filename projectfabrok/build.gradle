@@ -1,6 +1,10 @@
 allprojects {
     project.version = "0.1.0"
 
+    repositories {
+        repository("user11681")
+    }
+
     dependencies {
         modInclude("gfh")
     }

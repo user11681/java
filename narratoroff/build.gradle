@@ -1,6 +1,6 @@
 project.version = "0.0.1"
 
-noSpam = false
+project.noSpam = false
 
 repositories {
     repository("user11681")

@@ -17,7 +17,6 @@ import user11681.limitless.asm.mixin.access.EnchantmentScreenHandlerAccess;
 import user11681.limitless.config.LimitlessConfiguration;
 import user11681.limitless.config.common.CostDisplay;
 import user11681.limitless.config.enchantment.entry.normalization.EnchantmentNormalizationEntry;
-import user11681.limitless.enchantment.ExperienceUtil;
 
 @Mixin(EnchantmentScreen.class)
 abstract class EnchantmentScreenMixin extends HandledScreen<EnchantmentScreenHandler> {
