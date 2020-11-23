@@ -69,7 +69,7 @@ final Map<String, String> artifactMap = [
         "noauth"                  : "user11681:noauth:+",
         "optional"                : "user11681:optional:+",
         "phormat"                 : "user11681:phormat:+",
-        "projectfabrok"                     : "user11681:projectfabrok:+",
+        "projectfabrok"           : "user11681:projectfabrok:+",
         "prone"                   : "user11681:prone:+",
         "reachentityattributes"   : "com.jamieswhiteshirt:reach-entity-attributes:+",
         "reflect"                 : "user11681:reflect:+",
