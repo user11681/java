@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import user11681.limitless.config.LimitlessConfiguration;
 import user11681.limitless.config.enchantment.entry.normalization.EnchantmentNormalizationEntry;
+import user11681.limitless.enchantment.ExperienceUtil;
 
 @Mixin(PlayerEntity.class)
 abstract class PlayerEntityMixin {

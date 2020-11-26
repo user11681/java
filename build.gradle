@@ -8,7 +8,6 @@ import java.net.http.HttpResponse
 plugins {
     id("fabric-loom") version("0.5-SNAPSHOT")
     id("com.jfrog.bintray") version("1.8.5") apply(false)
-    id("org.jetbrains.kotlin.jvm") version("1.4.20") apply(false)
 }
 
 final Map<String, String> repositoryMap = [
@@ -28,6 +27,7 @@ final Map<String, String> repositoryMap = [
 final Map<String, String> artifactMap = [
         "api"                     : "net.fabricmc.fabric-api:fabric-api:+",
         "apibase"                 : "net.fabricmc.fabric-api:fabric-api-base:+",
+        "apiblockrenderlayer"     : "net.fabricmc.fabric-api:fabric-blockrenderlayer-v1:+",
         "apicommand"              : "net.fabricmc.fabric-api:fabric-command-api-v1:+",
         "apiscreenhandler"        : "net.fabricmc.fabric-api:fabric-screen-handler-api-v1:+",
         "apieventsinteraction"    : "net.fabricmc.fabric-api:fabric-events-interaction-v0:+",
@@ -121,7 +121,7 @@ dependencies {
 
                 thread.start()
             } else {
-                System.err.println("Lock file ${lock} could not be made; will not automatically run genSources.")
+                System.err.println("${lock} could not be made; will not automatically run genSources.")
             }
         }
     }
@@ -148,26 +148,6 @@ allprojects {
 
     ext.javaVersion = 8
     ext.noSpam = true
-
-    ext.kotlin = {final boolean enabled ->
-        if (enabled) {
-            apply(plugin: "kotlin")
-
-            final String version = JavaVersion.toVersion(project.javaVersion).toString()
-
-            compileKotlin {
-                kotlinOptions.jvmTarget = version
-            }
-
-            compileTestKotlin {
-                kotlinOptions.jvmTarget = version
-            }
-
-            dependencies {
-                api("org.jetbrains.kotlin:kotlin-stdlib-jdk${project.javaVersion}")
-            }
-        }
-    }
 
     ext.repository = {final String... names ->
         for (final String name : names) {
@@ -205,7 +185,9 @@ allprojects {
         Dependency dependency = null
 
         dependencies {
-            dependency = modApi(include(local(name)))
+            include(project(":${name.join(":")}"))
+
+            dependency = api(project(path: ":${name.join(":")}", configuration: "dev"))
         }
 
         return dependency

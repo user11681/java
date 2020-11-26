@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 1,
+    "id": "asm",
+    "name": "ASM",
+    "description": "ASM",
+    "version": "${version}",
+    "license": "LGPL-3.0",
+    "authors": ["user11681"],
+    "contact": {
+        "source": "https://github.com/user11681/mods/tree/asm",
+        "issues": "https://github.com/user11681/mods/issues"
+    },
+
+    "entrypoints": {
+        "main": [
+            "user11681.asm.ASM"
+        ]
+    }
+}

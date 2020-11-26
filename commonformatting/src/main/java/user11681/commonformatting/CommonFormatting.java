@@ -17,13 +17,12 @@ public class CommonFormatting implements FormattingInitializer {
 
     @Override
     public void register(final FormattingRegistry registry) {
-        registry.register("OVERLINE_0", OVERLINE_CODES[0], true);
-        registry.register("OVERLINE_1", OVERLINE_CODES[1], true);
-        registry.register("OVERLINE_2", OVERLINE_CODES[2], true);
-        registry.register("OVERLINE_3", OVERLINE_CODES[3], true);
-        registry.register("OVERLINE_4", OVERLINE_CODES[4], true);
-        registry.register("OVERLINE_5", OVERLINE_CODES[5], true);
-        registry.register("TEST", (char) 1222, true);
+        registry.register("OVERLINEA", OVERLINE_CODES[0], true);
+        registry.register("OVERLINEB", OVERLINE_CODES[1], true);
+        registry.register("OVERLINEC", OVERLINE_CODES[2], true);
+        registry.register("OVERLINED", OVERLINE_CODES[3], true);
+        registry.register("OVERLINEE", OVERLINE_CODES[4], true);
+        registry.register("OVERLINEF", OVERLINE_CODES[5], true);
     }
 
     @Override

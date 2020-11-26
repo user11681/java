@@ -1,4 +1,4 @@
-package user11681.limitless.asm.mixin.enchantment;
+package user11681.limitless.enchantment;
 
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import java.util.Collection;

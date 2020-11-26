@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import user11681.limitless.Limitless;
 import user11681.limitless.config.LimitlessConfiguration;
-import user11681.limitless.enchanting.EnchantmentUtil;
+import user11681.limitless.enchantment.EnchantmentUtil;
 
 @SuppressWarnings("UnresolvedMixinReference")
 @Mixin(EnchantmentScreenHandler.class)

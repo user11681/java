@@ -1,4 +1,4 @@
-package user11681.limitless.asm.mixin.enchantment;
+package user11681.limitless.enchantment;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

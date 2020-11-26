@@ -1,4 +1,4 @@
-package user11681.limitless.asm.mixin.enchantment;
+package user11681.limitless.enchantment;
 
 import java.util.Objects;
 import net.minecraft.block.Block;

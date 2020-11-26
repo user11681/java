@@ -15,6 +15,7 @@ import user11681.limitless.config.enchantment.entry.EnchantmentParticleConfigura
 import user11681.limitless.config.LimitlessConfiguration;
 import user11681.limitless.config.enchantment.entry.radius.HorizontalRadius;
 import user11681.limitless.config.enchantment.entry.radius.VerticalRadius;
+import user11681.limitless.enchantment.EnchantingBlocks;
 
 @Mixin(value = EnchantingTableBlock.class,
        priority = 100)

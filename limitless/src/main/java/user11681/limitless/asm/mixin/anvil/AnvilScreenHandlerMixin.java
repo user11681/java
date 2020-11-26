@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import user11681.limitless.config.LimitlessConfiguration;
-import user11681.limitless.asm.mixin.enchantment.ExperienceUtil;
+import user11681.limitless.enchantment.ExperienceUtil;
 
 @Mixin(value = AnvilScreenHandler.class, priority = -1000)
 abstract class AnvilScreenHandlerMixin {

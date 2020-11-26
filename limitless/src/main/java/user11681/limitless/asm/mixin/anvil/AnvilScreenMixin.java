@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import user11681.limitless.config.LimitlessConfiguration;
 import user11681.limitless.config.anvil.entry.AnvilNormalizationEntry;
 import user11681.limitless.config.common.CostDisplay;
-import user11681.limitless.asm.mixin.enchantment.ExperienceUtil;
+import user11681.limitless.enchantment.ExperienceUtil;
 
 @Mixin(AnvilScreen.class)
 abstract class AnvilScreenMixin extends HandledScreen<AnvilScreenHandler> {

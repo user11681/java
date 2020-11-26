@@ -1,0 +1,4 @@
+dependencies {
+    modInclude("apiresourceloader")
+    modInclude("apiblockrenderlayer")
+}
