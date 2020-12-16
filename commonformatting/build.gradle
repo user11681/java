@@ -1,9 +1,5 @@
-version = "0.0.0"
-
-repositories {
-    repository("user11681")
-}
+project.version = "0.0.0"
 
 dependencies {
-    localInclude("phormat")
+    apiInclude(":phormat")
 }

@@ -1,9 +1,7 @@
 project.version = "0.0.1"
 
-project.noSpam = false
-
-repositories {
-    repository("user11681")
+loom {
+    noSpam = false
 }
 
 dependencies {

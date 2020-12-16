@@ -88,15 +88,11 @@ abstract class FormattingMixin implements FormattingAccess {
               at = @At(value = "INVOKE",
                        target = "Ljava/util/stream/Stream;collect(Ljava/util/stream/Collector;)Ljava/lang/Object;"))
     private static Object fixDuplicates(final Stream<Formatting> stream, Collector<Formatting, Object, Map<String, Formatting>> collector) {
-        for (int i = 0; i < 100; i++) {
-            System.out.println("okkay this is epic");
-        }
+        final Object[] values = stream.toArray();
+        final Map<String, Object> byName = new Object2ReferenceArrayMap<>(values.length);
 
-        final Formatting[] values = stream.toArray(Formatting[]::new);
-        final Map<String, Formatting> byName = new Object2ReferenceArrayMap<>(values.length);
-
-        for (final Formatting formatting : values) {
-            byName.put(formatting.getName(), formatting);
+        for (final Object formatting : values) {
+            byName.put(((Formatting) formatting).getName(), formatting);
         }
 
         return byName;
@@ -115,10 +111,6 @@ abstract class FormattingMixin implements FormattingAccess {
 
     static {
         final String pattern = FORMATTING_CODE_PATTERN.toString();
-
-        for (int i = 0; i < 100; i++) {
-            System.out.println("FormattingMixin.<clinit>");
-        }
 
         for (final Map.Entry<FormattingInitializer, FormattingRegistryImpl> entrypointEntry : PhormatInitializer.registries.entrySet()) {
             final FormattingRegistryImpl registry = entrypointEntry.getValue();

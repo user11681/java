@@ -12,6 +12,7 @@ import org.objectweb.asm.tree.MethodNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+@SuppressWarnings("ConstantConditions")
 public class NarratorOffTransformer implements IMixinConfigPlugin {
     @Override
     public void onLoad(final String mixinPackage) {}

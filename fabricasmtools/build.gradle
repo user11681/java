@@ -1,10 +1,6 @@
 project.version = "0.3.2"
 
-repositories {
-    repository("user11681")
-}
-
 dependencies {
-    modInclude("reflect")
-    modInclude("unsafe")
+    apiInclude("reflect")
+    apiInclude("unsafe")
 }

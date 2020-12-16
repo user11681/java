@@ -5,8 +5,6 @@ minecraft {
 }
 
 dependencies {
-    modInclude("apibase")
-    modInclude("apinetworking")
-    modInclude("apiresourceloader")
-    modInclude("apiscreenhandler")
+    modInclude("api-base")
+    modInclude("api-resource-loader")
 }

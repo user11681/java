@@ -1,11 +1,13 @@
-version = "0.0.0"
+project.version = "0.0.0"
 
-javaVersion = 14
+loom {
+    javaVersion = 14
+}
 
 dependencies {
-    modInclude("apibase")
-    modInclude("apilifecycleevents")
-    modInclude("apikeybindings")
+    modInclude("api-base")
+    modInclude("api-lifecycle-events")
+    modInclude("api-key-bindings")
 
-    localInclude("cell")
+    apiInclude(":cell")
 }

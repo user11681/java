@@ -1,6 +1,7 @@
 package user11681.limitless.asm.mixin.enchantment;
 
 import java.util.List;
+
 import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import user11681.limitless.asm.mixin.access.EnchantmentScreenHandlerAccess;
+import user11681.limitless.asm.access.EnchantmentScreenHandlerAccess;
 import user11681.limitless.config.LimitlessConfiguration;
 import user11681.limitless.config.common.CostDisplay;
 import user11681.limitless.config.enchantment.entry.normalization.EnchantmentNormalizationEntry;
@@ -46,7 +47,7 @@ abstract class EnchantmentScreenMixin extends HandledScreen<EnchantmentScreenHan
         final PlayerEntity player = this.playerInventory.player;
         final EnchantmentNormalizationEntry normalization = LimitlessConfiguration.instance.enchantment.normalization;
 
-        if (normalization.enabled && normalization.display != CostDisplay.NORMAL && !player.getAbilities().creativeMode && player.experienceLevel > 30) {
+        if (normalization.enabled && normalization.display != CostDisplay.NORMAL && !player.abilities.creativeMode && player.experienceLevel > 30) {
             final int relative = ExperienceUtil.relativeCost(player, normalization.offset, this.backgroundEntryID + 1);
 
             if (normalization.display == CostDisplay.REPLACE) {

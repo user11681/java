@@ -1,9 +1,7 @@
-allprojects {
-    project.version = "0.1.0"
+subprojects {
+    plugins.apply("loom")
 
-    repositories {
-        repository("user11681")
-    }
+    project.version = "0.1.0"
 
     dependencies {
         modInclude("gfh")

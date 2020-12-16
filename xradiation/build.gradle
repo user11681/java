@@ -1,13 +1,13 @@
-version = "0.0.2"
+project.version = "0.0.2"
 
 minecraft {
     accessWidener "src/main/resources/xradiation.accesswidener"
 }
 
 dependencies {
-    modInclude("apibase")
-    modInclude("apikeybindings")
-    modInclude("apirendererapi")
-    modInclude("apirendererindigo")
-    modInclude("apiresourceloader")
+    modInclude("api-base")
+    modInclude("api-key-bindings")
+    modInclude("api-renderer-api")
+    modInclude("api-renderer-indigo")
+    modInclude("api-resource-loader")
 }

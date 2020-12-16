@@ -1,11 +1,10 @@
 package user11681.cell.client.gui.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import java.util.Collection;
 import java.util.List;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
+import com.mojang.blaze3d.systems.RenderSystem;
+import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
@@ -15,14 +14,22 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import user11681.cell.client.gui.DrawableElement;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 @SuppressWarnings("unchecked")
 @Environment(EnvType.CLIENT)
 public abstract class CellScreen extends Screen implements DrawableElement {
     public final ReferenceArrayList<DrawableElement> elements = new ReferenceArrayList<>();
+
+    protected CellScreen() {
+        this(LiteralText.EMPTY);
+    }
 
     protected CellScreen(final Text title) {
         super(title);

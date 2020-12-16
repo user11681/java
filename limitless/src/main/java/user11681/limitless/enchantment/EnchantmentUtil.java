@@ -13,7 +13,7 @@ import net.minecraft.util.registry.Registry;
 import user11681.limitless.asm.access.EnchantmentAccess;
 
 public interface EnchantmentUtil {
-    String INTERNAL_NAME = "user11681.limitless.enchanting";
+    String INTERNAL_NAME = "user11681/limitless/enchantment/EnchantmentUtil";
 
     int SUCCESS = 0;
     int ADD = 1;

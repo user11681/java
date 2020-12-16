@@ -1,6 +1,11 @@
-version = "0.0.0"
+project.version = "0.0.0"
 
 dependencies {
-    modInclude("apibase")
-    modInclude("apinetworking")
+    modInclude("api-base")
+    modInclude("api-networking")
+
+    modInclude("unsafe")
+    modInclude("reflect")
+    modInclude("net.bytebuddy:byte-buddy:+")
+    modInclude("net.bytebuddy:byte-buddy-agent:+")
 }

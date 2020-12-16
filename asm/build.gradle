@@ -1,4 +1,6 @@
+project.version = "0.0.0"
+
 dependencies {
-    modInclude("apiresourceloader")
-    modInclude("apiblockrenderlayer")
+    mod("api-resource-loader")
+    mod("api-block-render-layer")
 }

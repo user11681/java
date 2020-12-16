@@ -1,8 +1,9 @@
 package user11681.limitless.asm;
 
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import java.util.List;
 import java.util.ListIterator;
+
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.devtech.grossfabrichacks.transformer.TransformerApi;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
@@ -19,7 +20,7 @@ import user11681.limitless.config.LimitlessConfiguration;
 import user11681.limitless.config.enchantment.EnchantmentConfiguration;
 import user11681.limitless.enchantment.EnchantmentUtil;
 import user11681.shortcode.Shortcode;
-import user11681.shortcode.instruction.DelegatingInsnList;
+import user11681.shortcode.instruction.ExtendedInsnList;
 
 public class LimitlessTransformer extends TransformerPlugin implements Opcodes {
     private static final String getIntDescriptor = "(Ljava/lang/String;)I";
@@ -37,6 +38,7 @@ public class LimitlessTransformer extends TransformerPlugin implements Opcodes {
     private static final String putInt = method(10569);
 
     private static final String limitless_getOriginalMaxLevel = "limitless_getOriginalMaxLevel";
+    private static final String limitless_initialize = "limitless_initialize";
     private static final String limitless_maxLevel = "limitless_maxLevel";
 
     private static final ObjectOpenHashSet<String> enchantmentClassNames = new ObjectOpenHashSet<>(new String[]{Enchantment}, 0, 1, 1);
@@ -76,24 +78,22 @@ public class LimitlessTransformer extends TransformerPlugin implements Opcodes {
         final ListIterator<AbstractInsnNode> iterator = instructions.iterator();
 
         Shortcode.findForward(iterator,
-            (final AbstractInsnNode instruction) -> instruction.getOpcode() == INVOKEVIRTUAL && ((MethodInsnNode) instruction).name.equals(getMaxLevel),
-            (final AbstractInsnNode instruction) -> {
+            (AbstractInsnNode instruction) -> instruction.getOpcode() == INVOKEVIRTUAL && ((MethodInsnNode) instruction).name.equals(getMaxLevel),
+            (AbstractInsnNode instruction) -> {
                 Shortcode.removeBetweenInclusive(iterator, AbstractInsnNode.LINE, AbstractInsnNode.IINC_INSN);
 
                 iterator.next();
                 iterator.remove();
 
-                final DelegatingInsnList insertion = new DelegatingInsnList();
-                insertion.addVarInsn(ILOAD, 0);
-                insertion.addVarInsn(ALOAD, 7);
-                insertion.addVarInsn(ALOAD, 3);
-                insertion.addMethodInsn(
-                    INVOKESTATIC,
-                    EnchantmentUtil.INTERNAL_NAME,
-                    "getHighestSuitableLevel",
-                    Shortcode.composeMethodDescriptor("V", "I", Enchantment, "java/util/List"),
-                    false
-                );
+                final ExtendedInsnList insertion = new ExtendedInsnList()
+                    .iload(0)
+                    .aload(7)
+                    .aload(3)
+                    .invokestatic(
+                        EnchantmentUtil.INTERNAL_NAME,
+                        "getHighestSuitableLevel",
+                        Shortcode.composeMethodDescriptor("V", "I", Enchantment, "java/util/List")
+                    );
 
                 instructions.insert(iterator.previous(), insertion);
             }
@@ -104,7 +104,7 @@ public class LimitlessTransformer extends TransformerPlugin implements Opcodes {
         final ListIterator<AbstractInsnNode> iterator = method.instructions.iterator();
 
         Shortcode.findForward(iterator,
-            (final AbstractInsnNode instruction) -> instruction.getType() == AbstractInsnNode.INT_INSN && ((IntInsnNode) instruction).operand == 50,
+            (AbstractInsnNode instruction) -> instruction.getType() == AbstractInsnNode.INT_INSN && ((IntInsnNode) instruction).operand == 50,
             () -> {
                 iterator.remove();
 
@@ -205,20 +205,11 @@ public class LimitlessTransformer extends TransformerPlugin implements Opcodes {
 
                             while (instruction != null) {
                                 if (instruction.getOpcode() == Opcodes.RETURN) {
-                                    DelegatingInsnList setField = new DelegatingInsnList();
-                                    Label setOne = new Label();
-
-                                    setField.addVarInsn(Opcodes.ALOAD, 0); // this
-                                    setField.addVarInsn(Opcodes.ALOAD, 0); // this this
-                                    setField.addMethodInsn(Opcodes.INVOKEVIRTUAL, klass.name, limitless_getOriginalMaxLevel, "()I", false); // this I
-                                    setField.addInsn(Opcodes.ICONST_1); // this I I
-                                    setField.addJumpInsn(Opcodes.IF_ICMPLE, setOne); // this
-                                    setField.addLdcInsn(Integer.MAX_VALUE); // this I
-                                    setField.addFieldInsn(Opcodes.PUTFIELD, klass.name, limitless_maxLevel, "I");
-                                    setField.addInsn(Opcodes.RETURN);
-                                    setField.addLabel(setOne);
-                                    setField.addInsn(Opcodes.ICONST_1); // this I
-                                    setField.addFieldInsn(Opcodes.PUTFIELD, klass.name, limitless_maxLevel, "I");
+                                    AbstractInsnNode lastInstruction = new InsnNode(Opcodes.RETURN);
+                                    ExtendedInsnList setField = new ExtendedInsnList()
+                                        .aload(0)
+                                        .invokespecial(Enchantment, limitless_initialize, "()V")
+                                        .append(lastInstruction);
 
                                     instructions.insertBefore(instruction, setField);
                                 }

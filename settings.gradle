@@ -1,32 +1,51 @@
 pluginManagement {
     repositories {
         jcenter()
+
         maven {url = "https://maven.fabricmc.net"}
-        gradlePluginPortal()
+        maven {url = "https://dl.bintray.com/user11681/maven"}
     }
 }
 
-include("asm")
-include("cell")
-include("commonformatting")
-include("dynamicentry")
-include("fabricasmtools")
-include("fabriclexicon")
-//include("globalsettings")
-include("headsdowndisplay")
-include("invisiblelivingentities")
-include("limitless")
-include("mshell")
-include("narratoroff")
-include("noauth")
-include("persistententities")
+void addBuild(String name) {
+    addBuild("user11681", name)
+}
+
+void addBuild(String group, String name) {
+    includeBuild(name) {
+        dependencySubstitution {
+            substitute(module("${group}:${name}")).with(project(":"))
+        }
+    }
+}
+
+addBuild("net.gudenau.lib", "unsafe")
+addBuild("reflect")
+addBuild("shortcode")
+
+includeBuild("loom")
+
+include(":asm")
+include(":cell")
+include(":commonformatting")
+include(":dynamicentry")
+include(":fabricasmtools")
+include(":fabriclexicon")
+//include(":globalsettings")
+include(":headsdowndisplay")
+include(":invisiblelivingentities")
+include(":limitless")
+include(":mshell")
+include(":narratoroff")
+include(":noauth")
+include(":persistententities")
 include("phormat")
-include("postalservice")
-include("projectfabrok")
-include("prone")
-include("scale")
-//include("soulboundarmory")
-include("sturdygold")
-include("thorium")
-include("visp")
-include("xradiation")
+include(":postalservice")
+include(":projectfabrok")
+include(":prone")
+include(":scale")
+//include(":soulboundarmory")
+include(":sturdygold")
+include(":thorium")
+include(":visp")
+include(":xradiation")

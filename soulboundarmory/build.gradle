@@ -1,18 +1,20 @@
-version = "3.0.0"
+project.version = "3.0.0"
 
 minecraft {
     accessWidener("src/main/resources/soulboundarmory.accesswidener")
 }
 
 dependencies {
-    modInclude("cardinalcomponentsbase")
-    modInclude("cardinalcomponentsentity")
-    modInclude("cardinalcomponentsitem")
-    modInclude("reachentityattributes")
-    localInclude("cell")
+    modInclude("cardinal-components-base")
+    modInclude("cardinal-components-entity")
+    modInclude("cardinal-components-item")
+    modInclude("reach-entity-attributes")
+
+    apiInclude(":cell")
 
     mod("api")
-    bloated("modmenu")
-    local("invisiblelivingentities")
-    local("prone")
+    bloated("mod-menu")
+
+    implementation(":invisiblelivingentities")
+    implementation(":prone")
 }

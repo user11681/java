@@ -96,7 +96,7 @@ abstract class InGameHudMixin {
             final Triggers triggers = HDDConfig.instance.hotbar.trigger;
 
             if (triggers.slot) {
-                final PlayerInventory inventory = player.getInventory();
+                final PlayerInventory inventory = player.inventory;
 
                 if (reveal = inventory != null && selectedSlot != inventory.selectedSlot) {
                     selectedSlot = inventory.selectedSlot;

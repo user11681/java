@@ -1,10 +1,10 @@
 package user11681.cell.client.gui.widget;
 
-import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import java.util.Arrays;
 import java.util.List;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
+import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
+import net.minecraft.client.font.TextHandler;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -23,12 +23,16 @@ import user11681.cell.client.gui.widget.callback.TextProvider;
 import user11681.cell.client.gui.widget.callback.TooltipProvider;
 import user11681.cell.client.gui.widget.callback.TooltipRenderer;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 @SuppressWarnings("unchecked")
 @Environment(EnvType.CLIENT)
 public abstract class Widget<T extends Widget<T>> extends CellElement {
     protected static final TextureManager textureManager = Cell.client.getTextureManager();
     protected static final SoundManager soundManager = Cell.client.getSoundManager();
     protected static final TextRenderer textRenderer = Cell.client.textRenderer;
+    protected static final TextHandler textHandler = textRenderer.getTextHandler();
 
     public List<CellElement> children = ReferenceArrayList.wrap(new CellElement[0]);
 

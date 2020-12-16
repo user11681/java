@@ -37,7 +37,7 @@ abstract class AnvilScreenMixin extends HandledScreen<AnvilScreenHandler> {
         final PlayerEntity player = this.playerInventory.player;
         final AnvilNormalizationEntry normalization = LimitlessConfiguration.instance.anvil.normalization;
 
-        if (normalization.enabled && normalization.display != CostDisplay.NORMAL && !player.getAbilities().creativeMode && player.experienceLevel > cost) {
+        if (normalization.enabled && normalization.display != CostDisplay.NORMAL && !player.abilities.creativeMode && player.experienceLevel > cost) {
             final int relative = ExperienceUtil.normalizedCost(player, cost);
 
             if (normalization.display == CostDisplay.REPLACE) {

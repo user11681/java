@@ -1,10 +1,14 @@
-version = "0.1.0"
+project.version = "0.1.0"
+
+loom {
+    minecraftVersion = "1.16.4"
+}
 
 dependencies {
-    modInclude("apibase")
-    modInclude("apikeybindings")
-    modInclude("apiresourceloader")
-    bloatedInclude("autoconfig")
-    bloatedInclude("clothconfig")
-    bloated("modmenu")
+    modInclude("api-base")
+    modInclude("api-key-bindings")
+    modInclude("api-resource-loader")
+    bloatedInclude("auto-config")
+    bloatedInclude("cloth-config")
+    bloated("mod-menu")
 }

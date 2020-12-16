@@ -4,7 +4,6 @@
     "compatibilityLevel": "JAVA_8",
     "plugin": "user11681.limitless.asm.LimitlessTransformer",
     "mixins": [
-        "access.EnchantmentScreenHandlerAccess",
         "anvil.AnvilScreenHandlerMixin",
         "command.EffectCommandMixin",
         "command.EnchantCommandMixin",
