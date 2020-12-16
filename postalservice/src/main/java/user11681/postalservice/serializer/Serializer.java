@@ -28,7 +28,7 @@ public abstract class Serializer {
 
     protected static final Logger logger = LogManager.getLogger(ThePostalService.class);
 
-    private static byte nextIdentifier;
+    private static byte nextIdentifier = Byte.MIN_VALUE;
 
     public final byte identifier;
 
